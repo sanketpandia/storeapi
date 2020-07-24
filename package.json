@@ -10,8 +10,14 @@
   "author": "MAS",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "lodash": "^4.17.19",
-    "mongoose": "^5.9.25"
+    "mongoose": "^5.9.25",
+    "nodemon": "^2.0.4",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4",
+    "twilio": "^3.48.0",
+    "uuid": "^8.2.0"
   }
 }

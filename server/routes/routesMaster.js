@@ -2,7 +2,10 @@
 
 const
     apiRoute = require('./apis/apiMaster'),
-    errorController = require('../controllers/errorController')
+    errorController = require('../controllers/errorController'),
+    swaggerUi = require('swagger-ui-express'),
+    swaggerConfig = require('../swaggerConfig')
+
 
 function init(server) {
     server.get('*', function (req, res, next) {
@@ -13,9 +16,15 @@ function init(server) {
     server.get('/', function (req, res) {
         res.redirect('/error');
     });
-
+    /**
+     * @swagger
+     * /api
+     * get:
+     * description : IDK
+     */
     server.use('/api', apiRoute);
     server.use('/error', errorController)
+    server.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerConfig.swaggerDocument))
     
 }
 

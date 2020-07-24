@@ -2,7 +2,17 @@
 
 const
     express = require('express'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose'),
+    path = require('path'),
+    fs = require('fs'),
+    configFilePath = path.join(__dirname,'../appConfig.json');
+
+
+//Loading and parsing the config file
+let configFileRawData = fs.readFileSync(configFilePath)
+let configs = JSON.parse(configFileRawData);
+
 
 module.exports = function() {
     let server = express(),
@@ -31,6 +41,13 @@ module.exports = function() {
         server.listen(port, function () {
             console.log('Express server listening on - http://' + hostname + ':' + port);
         });
+
+        mongoose.connect(configs.dbConnectionString).then(()=>{
+            console.log("Mongo Connection Successful")
+        })
+        .catch(() => {
+            console.log("Database Connection failed");
+        })
     };
 
     return {

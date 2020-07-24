@@ -1,0 +1,8 @@
+{
+    "dbConnectionString" : "mongodb+srv://notahacker:clueless@testcluster.nk640.mongodb.net/storeDB",
+    "dbName" : "",
+    "TwilioAccountSID" : "ACde0ada7f899895624c1b006ad452a92c",
+    "TwilioAuthToken" : "0139cc8ed6edc6463454cf23f0cdd017",
+    "TwilioPhoneNumber" : "+12057518688"
+    
+}
