@@ -58,8 +58,14 @@ async function addSomeObjects(){
     });
 }
 
+async function getUniqueCategories(){
+    let searchResult = await productModel.find().distinct('category');
+    console.log(searchResult);
+    return searchResult;
+}
 module.exports = {
     getProductsByCategory : getProductsByCategory,
     addSomeObjects : addSomeObjects,
-    getProductByText : getProductByText
+    getProductByText : getProductByText,
+    getUniqueCategories : getUniqueCategories
 }

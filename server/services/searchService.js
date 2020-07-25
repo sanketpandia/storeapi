@@ -30,8 +30,20 @@ async function addSomeObjects(req,res){
         message : 'product added successfully'
     })
 }
+
+async function getUniqueCategories(req,res){
+    dao.getUniqueCategories().then((data) => {
+        res.json(data);
+    }).catch(err => {
+        res.json({
+            error : true,
+            message : err
+        });
+    })
+}
 module.exports = {  
     getProductsByCategory : getProductsByCategory,
     addSomeObjects: addSomeObjects,
-    getProductByText : getProductByText
+    getProductByText : getProductByText,
+    getUniqueCategories : getUniqueCategories
 }
