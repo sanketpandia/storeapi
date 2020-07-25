@@ -8,6 +8,7 @@ const
 let router = express.Router();
 
 router.use('/login', loginController);
-router.use('/search', searchController)
-router.use('/order', orderController)
+router.use('/search', searchController);
+router.use('/order', orderController);
+router.use('/partnerLogin', partnerLoginController);
 module.exports = router;
