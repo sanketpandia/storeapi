@@ -3,11 +3,11 @@
 const
     express = require('express'),
     loginController = require('../../controllers/loginController'),
-    searchController = require('../../controllers/searchController');
-
+    searchController = require('../../controllers/searchController'),
+    orderController = require('../../controllers/orderController');
 let router = express.Router();
 
 router.use('/login', loginController);
 router.use('/search', searchController)
-
+router.use('/order', orderController)
 module.exports = router;

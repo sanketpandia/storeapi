@@ -11,3 +11,6 @@ var orderSchema = new Schema({
     price : Number,
     orderDateTime : Date
 })
+
+const order = mongoose.model('order',orderSchema);
+module.exports = order;
