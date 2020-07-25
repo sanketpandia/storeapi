@@ -7,7 +7,7 @@ const
     bodyParser = require('body-parser'),
         
     //Importing Unique id generator
-    uuid = require('uuid/v4'),
+    uuid = require('uuid'),
 
     //Linking to data access layer and to external services
     dao = require('../dao/loginDao'),
