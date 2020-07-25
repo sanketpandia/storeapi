@@ -11,5 +11,7 @@ let router = express.Router();
  * post :
  *  To intialise the login process 
  */
-router.get('/category', searchService.getProductsByCategory)
+router.get('/category/:category', searchService.getProductsByCategory);
+router.get('/add', searchService.addSomeObjects);
+router.get('/text/:text', searchService.getProductByText)
 module.exports = router;

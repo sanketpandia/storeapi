@@ -1,5 +1,7 @@
 'use strict'
 
+const { json } = require('express');
+
 const 
     UserModel = require('../models/userModel'),
     bodyParser = require('body-parser'),
@@ -29,41 +31,44 @@ const
  * Creates an OTP and a session ID which are to be matched later to authenticate the session
  * Sends OTP to user device. Makes calls to Twilio service and loginDao to update database
  */
-async function initLogin(req,res, next){
+async function initLogin(req,res){
     let generatedOtp = parseInt(Math.random() * 1000000);
     let generatedSessionId = uuid();
     var isUserDataUpdated = false;
+    var otpResponse, errorMessage;
 
-    //Checks if user is present and updates the entry if the user is present. If not create an user
-    isUserDataUpdated =  await dao.checkExistingUser(req.body.phone, generatedOtp, generatedSessionId).then((data) => {
-        if(data === true){
-            isUserDataUpdated = true
-        }
-    })
-    .catch((err) => {
+    //Calling the OTP service and the mongo service to update the login credentials
+    await Promise.all([
+        dao.checkExistingUser(req.body.phone, generatedOtp, generatedSessionId),
+        otpService.sendLoginOtp(req.body.phone, generatedOtp)
+    ]).then((results) =>{
+        isUserDataUpdated = results[0];
+        otpResponse = JSON.stringify(results[1]);
+        
+    }).catch(err => {
         console.log(err);
     })
-    ;
+    otpResponse = JSON.parse(otpResponse);
 
-    //Send otp call
-    let otpResponse = await otpService.sendLoginOtp(req.body.phone, generatedOtp)
-    console.log(otpResponse)
-    if(!typeof otpResponse ==='undefined' && otpResponse.hasOwnProperty(error_code) && otpResponse.error_code === null && isUserDataUpdated){
+    if(!(typeof otpResponse ==='undefined') && otpResponse.hasOwnProperty('errorCode') && otpResponse.errorCode === null && isUserDataUpdated){
+        res.status(200);
         res.json(successResponse);
     }
     else if(isUserDataUpdated){
+        res.status(500);
         res.json({
-            message : "OTP Sending failed. Check Twilio configuration in appConfig.json"
+            message : "OTP Sending failed. Check Twilio configuration in appConfig.json",
+            error : errorMessage
         });
     }
     else{
         console.log(isUserDataUpdated)
-        
+        res.status(500);
         res.json({
-            message : "User Data couldn't be uploaded. Check Database connection"
+            message : "User Data couldn't be uploaded. Check Database connection",
+            error : errorMessage
         });
     }
-
 }
 
 /**

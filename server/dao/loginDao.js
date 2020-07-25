@@ -24,7 +24,8 @@ async function checkExistingUser(phone, otp, sessionId){
     .catch(err => {
        console.log( 'Error in uploading user data to mongo server: ' + err);
        return false;
-    })
+    });
+    return true;
 }
 
 async function getUserDetails(phone, otp){
@@ -34,6 +35,8 @@ async function getUserDetails(phone, otp){
     }
     return userModel.findOne(searchValue);
 }
+
+
 
 module.exports = {
     checkExistingUser : checkExistingUser,
