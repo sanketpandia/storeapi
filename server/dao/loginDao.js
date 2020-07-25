@@ -1,7 +1,6 @@
 'use strict'
 const
     userModel = require('../models/userModel');
-const { search } = require('../controllers/loginController');
 
 async function checkExistingUser(phone, otp, sessionId){
     let userFilter = { phone : phone}
