@@ -2,7 +2,7 @@
     "dbConnectionString" : "mongodb+srv://notahacker:clueless@testcluster.nk640.mongodb.net/storeDB",
     "dbName" : "",
     "TwilioAccountSID" : "ACde0ada7f899895624c1b006ad452a92c",
-    "TwilioAuthToken" : "d9c80b5584637763366a1e5a8c34771e",
+    "TwilioAuthToken" : "0362dca0b0b1a8b4fdc3485fa218f92a",
     "TwilioPhoneNumber" : "+12057518688"
     
 }

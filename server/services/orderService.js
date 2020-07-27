@@ -2,7 +2,7 @@
 
 const
     dao = require('../dao/orderDao'),
-    uuid = require('uuid/v4');
+    uuid = require('uuid-random');
 
 async function placeOrder(req,res){
     let orderId = uuid();
